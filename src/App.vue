@@ -1,19 +1,56 @@
 <template>
-  <div class="container">
-    <h1>Expense Tracker</h1>
-    <!-- Your components will go here -->
+  <div class="app-container">
+    <NavigationBar />
+    <div class="main-content">
+      <CalendarView />
+      <OverviewPanel />
+    </div>
   </div>
 </template>
 
 <script>
+import NavigationBar from './components/NavigationBar.vue'
+import CalendarView from './components/Calendar/CalendarView.vue'
+import OverviewPanel from './components/Overview/OverviewPanel.vue'
+
 export default {
   name: 'App',
   components: {
-    // Register your components here
+    NavigationBar,
+    CalendarView,
+    OverviewPanel,
+  },
+  data() {
+    return {
+      expenses: [],
+      selectedDate: null,
+    }
   },
 }
 </script>
 
 <style>
-/* Your base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
+.app-container {
+  margin: 0 auto;
+  padding: 20px;
+  width: 100%;
+}
+
+.main-content {
+  display: flex;
+  margin-top: 20px;
+  width: 100%;
+  gap: 20px;
+}
 </style>
