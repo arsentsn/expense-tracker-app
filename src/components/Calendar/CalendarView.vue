@@ -197,7 +197,7 @@ export default {
 .directional-button {
   border-radius: 20px;
   border: none;
-  background-color: #f16e20;
+  background-color: #004467;
   padding: 4px 10px;
   color: white;
   font-weight: 600;
@@ -229,7 +229,7 @@ export default {
 
 .calendar-day.today {
   font-weight: bold;
-  border: 2px solid var(--primary-color, #4caf50);
+  border: 2px solid #4caf50;
 }
 
 .calendar-day.selected {
@@ -243,7 +243,7 @@ export default {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: #f16e20;
+  background-color: #004467;
   color: white;
   border: none;
   font-size: 14px;
