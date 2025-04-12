@@ -5,8 +5,13 @@
       <h2>{{ monthName }} {{ currentYear }}</h2>
       <button @click="nextMonth">Next</button>
     </div>
-    <div class="weekdays">
-      <div class="weekday" v-for="day in weekdays" :key="day">{{ day }}</div>
+    <div class="weekdays-header-container">
+      <div class="weekday-header" v-for="day in weekdays" :key="day">{{ day }}</div>
+    </div>
+    <div class="calendar-grid">
+      <div v-for="day in monthDays" :key="day" class="calendar-day">
+        {{ day }}
+      </div>
     </div>
   </div>
 </template>
@@ -19,6 +24,22 @@ export default {
     return {
       currentDate: new Date(),
     }
+  },
+
+  methods: {
+    previousMonth() {
+      const newDate = new Date(this.currentDate)
+      newDate.setMonth(newDate.getMonth() - 1)
+      this.currentDate = newDate
+    },
+    nextMonth() {
+      const newDate = new Date(this.currentDate)
+      newDate.setMonth(newDate.getMonth() + 1)
+      this.currentDate = newDate
+    },
+    getDaysInMonth() {
+      return new Date(this.currentYear, this.currentMonth + 1, 0).getDate()
+    },
   },
 
   computed: {
@@ -48,18 +69,15 @@ export default {
     weekdays() {
       return ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
     },
-  },
+    monthDays() {
+      let days = []
+      let totalDays = this.getDaysInMonth() // int
 
-  methods: {
-    previousMonth() {
-      const newDate = new Date(this.currentDate)
-      newDate.setMonth(newDate.getMonth() - 1)
-      this.currentDate = newDate
-    },
-    nextMonth() {
-      const newDate = new Date(this.currentDate)
-      newDate.setMonth(newDate.getMonth() + 1)
-      this.currentDate = newDate
+      for (let day = 1; day <= totalDays; day++) {
+        days.push(day)
+      }
+
+      return days
     },
   },
 }
@@ -79,16 +97,28 @@ export default {
   justify-content: space-between;
 }
 
-.weekdays {
+.weekdays-header-container {
   display: flex;
   justify-content: space-between;
   margin-top: 15px;
 }
 
-.weekday {
+.weekday-header {
   flex: 1;
   text-align: center;
   font-weight: 500;
   padding: 8px 0;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.calendar-day {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #eee;
 }
 </style>
