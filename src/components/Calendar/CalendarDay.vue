@@ -1,0 +1,137 @@
+<template>
+  <div
+    class="calendar-day"
+    :class="{
+      'prev-month': type === 'prev-month',
+      'next-month': type === 'next-month',
+      'today': isToday,
+      'selected': isSelected
+    }"
+    @click="selectDay"
+  >
+    {{ day }}
+    <!-- Inline add expense button, only for current month days -->
+    <button
+      v-if="type === 'current-month'"
+      class="add-expense-button"
+      @click.stop="addExpense"
+    >
+      +
+    </button>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'CalendarDay',
+  
+  props: {
+    day: {
+      type: Number,
+      required: true
+    },
+    type: {
+      type: String,
+      required: true,
+      validator: (value) => ['prev-month', 'current-month', 'next-month'].includes(value)
+    },
+    isToday: {
+      type: Boolean,
+      default: false
+    },
+    isSelected: {
+      type: Boolean,
+      default: false
+    },
+    month: {
+      type: Number,
+      required: true
+    },
+    year: {
+      type: Number,
+      required: true
+    }
+  },
+  
+  methods: {
+    selectDay() {
+      if (this.type === 'current-month') {
+        this.$emit('select-day', this.day);
+      }
+    },
+    
+    addExpense() {
+      if (this.type === 'current-month') {
+        const selectedDate = new Date(this.year, this.month, this.day);
+        this.$emit('add-expense', selectedDate);
+      }
+    }
+  }
+}
+</script>
+
+<style scoped>
+.calendar-day {
+  text-align: left;
+  padding: 4px 8px;
+  border: 1px solid #eee;
+  height: 80px;
+  position: relative;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.calendar-day.prev-month,
+.calendar-day.next-month {
+  color: #ccc;
+  background-color: #f9f9f9;
+  cursor: default;
+}
+
+.calendar-day.today {
+  font-weight: bold;
+  border: 2px solid #4caf50;
+}
+
+.calendar-day.selected {
+  background-color: rgba(76, 175, 80, 0.1);
+}
+
+.add-expense-button {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #004467;
+  color: white;
+  border: none;
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  opacity: 0;
+  transition:
+    opacity 0.3s ease,
+    transform 0.2s,
+    background-color 0.2s;
+  z-index: 5;
+}
+
+.add-expense-button:hover {
+  background-color: #e15e10;
+  transform: scale(1.1);
+}
+
+.calendar-day:hover .add-expense-button {
+  opacity: 1;
+}
+
+.calendar-day.prev-month .add-expense-button,
+.calendar-day.next-month .add-expense-button {
+  display: none;
+}
+</style>
