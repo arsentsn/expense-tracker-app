@@ -1,26 +1,31 @@
 <template>
   <nav class="navigation-bar">
     <div class="logo">Expense Tracker</div>
-    <div class="actions">
-      <button class="settings-button">Settings</button>
-    </div>
+    <button class="profile-button"><ProfileIcon /></button>
   </nav>
 </template>
 
 <script>
+import ProfileIcon from './icons/ProfileIcon.vue'
+
 export default {
   name: 'NavigationBar',
+  components: { ProfileIcon },
 }
 </script>
 
 <style scoped>
 .navigation-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
+  padding: 5px 15px;
   background-color: #fff;
-  border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -30,16 +35,8 @@ export default {
   color: #333;
 }
 
-.settings-button {
-  background-color: #4caf50;
+.profile-button {
   border: none;
-  color: white;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.settings-button:hover {
-  background-color: #45a049;
+  background: none;
 }
 </style>

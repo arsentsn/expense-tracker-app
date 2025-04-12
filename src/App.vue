@@ -43,11 +43,12 @@ body {
 
 .app-container {
   margin: 0 auto;
-  padding: 20px;
+  padding: 20px 40px;
   width: 100%;
 }
 
 .main-content {
+  padding-top: 40px; /* Navigation bar height */
   display: flex;
   margin-top: 20px;
   width: 100%;
