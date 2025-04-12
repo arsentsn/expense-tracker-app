@@ -59,5 +59,9 @@ body {
   .main-content {
     flex-direction: column;
   }
+
+  .app-container {
+    padding: 5px;
+  }
 }
 </style>

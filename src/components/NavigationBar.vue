@@ -25,6 +25,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 5px 12px;
+  background-color: #f5f5f5;
 }
 
 .logo {
