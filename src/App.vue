@@ -2,7 +2,7 @@
   <div class="app-container">
     <NavigationBar />
     <div class="main-content">
-      <CalendarView @add-expense="openExpenseModal" />
+      <CalendarView @add-expense="openExpenseModal" :expenses="expenses" />
       <OverviewPanel />
     </div>
   </div>
@@ -19,6 +19,7 @@ import NavigationBar from './components/NavigationBar.vue'
 import CalendarView from './components/Calendar/CalendarView.vue'
 import OverviewPanel from './components/Overview/OverviewPanel.vue'
 import ExpenseModal from './components/ExpenseModal.vue'
+import storageService from './services/storage.js'
 
 export default {
   name: 'App',
@@ -36,11 +37,18 @@ export default {
       dateForNewExpense: new Date(),
     }
   },
+
+  created() {
+    this.expenses = storageService.readExpenses()
+  },
   methods: {
     saveNewExpense(expenseData) {
       this.expenses.push(expenseData)
+
+      storageService.createExpense(expenseData)
+
       this.showExpenseModal = false
-      // localStorage stuff later
+
       console.log('New expense added:', expenseData)
     },
     openExpenseModal(date) {

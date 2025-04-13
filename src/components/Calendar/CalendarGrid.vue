@@ -5,14 +5,15 @@
     </div>
     <div class="calendar-grid">
       <calendar-day
-        v-for="(day, index) in calendarDays"
+        v-for="(dayObj, index) in calendarDays"
         :key="index"
-        :day="day.day"
-        :type="day.type"
-        :is-today="day.isToday"
-        :is-selected="day.isSelected"
+        :day="dayObj.day"
+        :type="dayObj.type"
+        :is-today="dayObj.isToday"
+        :is-selected="dayObj.isSelected"
         :month="currentMonth"
         :year="currentYear"
+        :day-expenses="getExpensesForDay(dayObj.day, dayObj.type)"
         @select-day="onSelectDay"
         @add-expense="onAddExpense"
       />
@@ -42,6 +43,10 @@ export default {
     selectedDay: {
       type: Number,
       default: null
+    },
+    expenses: {
+      type: Array,
+      default: () => []
     }
   },
   
@@ -62,6 +67,13 @@ export default {
     
     onAddExpense(date) {
       this.$emit('add-expense', date)
+    },
+    
+    getExpensesForDay(day, type) {
+      if (type !== 'current-month') return []
+      
+      const dateString = new Date(this.currentYear, this.currentMonth, day).toISOString().split('T')[0]
+      return this.expenses.filter(expense => expense.date === dateString)
     }
   },
   

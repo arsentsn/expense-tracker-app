@@ -59,7 +59,7 @@ export default {
     return {
       expenseName: '',
       amount: '',
-      selectedCategory: null,
+      selectedCategory: 'other',
       categories: [
         { id: 'food', name: 'Food', icon: '🍔' },
         { id: 'transport', name: 'Transport', icon: '🚗' },
@@ -78,12 +78,27 @@ export default {
       this.$emit('close')
     },
     submitExpense() {
-      //add stuff
+      if (!this.expenseName.trim() || !this.amount || isNaN(parseFloat(this.amount)) || parseFloat(this.amount) <= 0) {
+        alert('Please enter a valid name and amount')
+        return
+      }
+      
+      const expense = {
+        id: Date.now().toString(),
+        name: this.expenseName.trim(),
+        amount: parseFloat(this.amount),
+        category: this.selectedCategory,
+        date: this.date ? this.date.toISOString().split('T')[0] : new Date().toISOString().split('T')[0]
+      }
+      
+      this.$emit('save', expense)
+      this.resetForm()
+      this.$emit('close')
     },
     resetForm() {
       this.expenseName = ''
       this.amount = ''
-      this.selectedCategory = null
+      this.selectedCategory = 'other'
     },
   },
 }

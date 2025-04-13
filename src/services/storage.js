@@ -1,4 +1,4 @@
-/**
+/*
  * Expense Data Structure
  *
  * {
@@ -7,7 +7,6 @@
  *   amount: number,       // Amount in dollars (e.g., 15.99)
  *   date: string,         // ISO date string (e.g., "2025-04-13")
  *   category: string,     // Category ID (e.g., "food", "transport")
- *   notes: string         // Optional additional information
  * }
  */
 
@@ -18,7 +17,7 @@ export default {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(expenses))
   },
 
-  getExpenses() {
+  readExpenses() {
     const expenses = localStorage.getItem(STORAGE_KEY)
     if (expenses) {
       return JSON.parse(expenses)
@@ -27,14 +26,14 @@ export default {
     }
   },
 
-  addExpense(expense) {
-    const expenses = this.getExpenses()
+  createExpense(expense) {
+    const expenses = this.readExpenses()
     expenses.push(expense)
     this.saveExpenses(expenses)
   },
 
   updateExpense(id, updatedExpense) {
-    const expenses = this.getExpenses()
+    const expenses = this.readExpenses()
     const index = expenses.findIndex((expense) => expense.id === id)
     if (index !== -1) {
       expenses[index] = { ...expenses[index], ...updatedExpense }
@@ -45,7 +44,7 @@ export default {
   },
 
   deleteExpense(id) {
-    const expenses = this.getExpenses()
+    const expenses = this.readExpenses()
     const filteredExpenses = expenses.filter((expense) => expense.id !== id)
     if (filteredExpenses.length !== expenses.length) {
       this.saveExpenses(filteredExpenses)

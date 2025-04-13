@@ -11,6 +11,7 @@
       :current-month="currentMonth"
       :current-year="currentYear"
       :selected-day="selectedDay"
+      :expenses="expenses"
       @day-selected="selectDay"
       @add-expense="addExpenseForDay"
     />
@@ -27,6 +28,13 @@ export default {
   components: {
     CalendarHeader,
     CalendarGrid
+  },
+  
+  props: {
+    expenses: {
+      type: Array,
+      default: () => []
+    }
   },
 
   data() {
