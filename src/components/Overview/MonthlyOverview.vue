@@ -11,7 +11,7 @@
     </div>
 
     <!-- Weekly Spending Section -->
-    <div class="section">
+    <div class="section" v-if="hasExpenses">
       <h3 class="weekly-spending-header">Weekly Spending</h3>
       <div v-for="(week, index) in weeklyExpenses" :key="index" class="week-row">
         <div class="week-label">Week {{ week.week }}</div>
@@ -25,7 +25,7 @@
     </div>
 
     <!-- Top Categories Section -->
-    <div class="section">
+    <div class="section" v-if="hasExpenses">
       <h3 class="top-categories-header">Top Categories</h3>
       <div v-for="category in topCategories" :key="category.id" class="category-row">
         <div class="category-icon">{{ getCategoryIcon(category.id) }}</div>
@@ -35,6 +35,10 @@
         </div>
         <div class="category-percentage">{{ category.percentage }}%</div>
       </div>
+    </div>
+
+    <div class="no-expenses-message" v-if="!hasExpenses">
+      <p>No spending recorded for this month</p>
     </div>
   </div>
 </template>
@@ -79,6 +83,10 @@ export default {
   },
 
   computed: {
+    hasExpenses() {
+      return this.currentMonthExpenses.length > 0
+    },
+
     isMobileView() {
       return this.windowWidth < 768
     },
@@ -295,6 +303,7 @@ export default {
 
 .category-row {
   border-radius: 8px;
+  border-bottom: 1px solid #d6d6d65c;
   transition: background-color 0.2s;
 }
 
@@ -326,6 +335,15 @@ export default {
   font-weight: bold;
   color: #004467;
   text-align: right;
+}
+
+.no-expenses-message {
+  padding: 20px;
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  border-radius: 8px;
+  margin-top: 15px;
 }
 
 /* Mobile (375px - 767px) */

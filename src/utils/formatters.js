@@ -1,18 +1,24 @@
+/**
+ * Formats a number depending on its size and screen size
+ * @param {number} value - The value to format
+ * @param {boolean} useAbbreviations - Whether to use abbreviations (K, M) for large numbers
+ * @return {string} - The formatted value
+ */
 export function formatCurrency(value, useAbbreviations = false) {
   if (value === undefined || value === null) return ''
-
+  
+  // If it's a whole number, always display without decimals
+  if (Math.floor(value) === value || value.toFixed(2).endsWith('.00')) {
+    return Math.floor(value).toString()
+  }
+  
   // On mobile, we want to be more aggressive with formatting
   if (useAbbreviations) {
-    // For small numbers, just remove decimal places if they're .00
+    // For small numbers (< 1000), show only one decimal place if needed
     if (value < 1000) {
-      // If value has no decimal part or decimal part is .00
-      if (Math.floor(value) === value || value.toFixed(2).endsWith('.00')) {
-        return Math.floor(value).toString()
-      }
-      // For values with decimals, show only one decimal place
       return value.toFixed(1)
     }
-
+    
     // For thousands (1,000 - 999,999)
     if (value < 1000000) {
       const thousands = value / 1000
@@ -22,7 +28,7 @@ export function formatCurrency(value, useAbbreviations = false) {
       }
       return thousands.toFixed(1) + 'K'
     }
-
+    
     // For millions (1,000,000+)
     const millions = value / 1000000
     // If it's a whole number of millions, don't show decimals
@@ -31,7 +37,7 @@ export function formatCurrency(value, useAbbreviations = false) {
     }
     return millions.toFixed(1) + 'M'
   }
-
-  // For desktop, show the full format with 2 decimal places
+  
+  // For desktop with fractional values, show 2 decimal places
   return value.toFixed(2)
 }
