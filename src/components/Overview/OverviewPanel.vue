@@ -1,10 +1,10 @@
 <template>
   <div class="overview-panel">
-    <monthly-overview 
-      :expenses="expenses" 
+    <monthly-overview
+      :expenses="expenses"
       :categories="categories"
-      :current-month="getCurrentMonth()"
-      :current-year="getCurrentYear()"
+      :current-month="getCurrentMonth(selectedDate)"
+      :current-year="getCurrentYear(selectedDate)"
     />
   </div>
 </template>
@@ -42,14 +42,14 @@ export default {
       ],
     }
   },
-  
+
   methods: {
-    getCurrentMonth() {
-      return new Date().getMonth();
+    getCurrentMonth(date = new Date()) {
+      return date.getMonth()
     },
-    getCurrentYear() {
-      return new Date().getFullYear();
-    }
+    getCurrentYear(date = new Date()) {
+      return date.getFullYear()
+    },
   },
 }
 </script>

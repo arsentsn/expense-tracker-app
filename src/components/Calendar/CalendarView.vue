@@ -49,12 +49,14 @@ export default {
       const newDate = new Date(this.currentDate)
       newDate.setMonth(newDate.getMonth() - 1)
       this.currentDate = newDate
+      this.$emit('month-changed', new Date(this.currentDate))
     },
     
     nextMonth() {
       const newDate = new Date(this.currentDate)
       newDate.setMonth(newDate.getMonth() + 1)
       this.currentDate = newDate
+      this.$emit('month-changed', new Date(this.currentDate))
     },
     
     selectDay(day) {

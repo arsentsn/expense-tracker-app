@@ -5,12 +5,12 @@
 }
 
 button {
-  cursor: pointer; /* This is good to keep globally */
-  transition: opacity 0.2s ease; /* Smooth transition for hover effect */
+  cursor: pointer;
+  transition: opacity 0.2s ease;
 }
 
 button:hover {
-  opacity: 0.8; /* Subtle opacity change on hover */
+  opacity: 0.8;
 }
 
 input,
