@@ -13,7 +13,7 @@
     <div class="day-number">{{ day }}</div>
 
     <div v-if="hasExpenses" class="expense-info">
-      <div class="expense-amount">{{ totalAmount }}€</div>
+      <div class="expense-amount">{{ formattedAmount }}€</div>
     </div>
     <div v-if="hasExpenses">
       <div class="expense-count">({{ dayExpenses.length }})</div>
@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import { formatCurrency } from '../../utils/formatters.js'
+
 export default {
   name: 'CalendarDay',
 
@@ -61,6 +63,20 @@ export default {
     },
   },
 
+  data() {
+    return {
+      windowWidth: window.innerWidth
+    }
+  },
+
+  created() {
+    window.addEventListener('resize', this.updateWindowWidth)
+  },
+
+  unmounted() {
+    window.removeEventListener('resize', this.updateWindowWidth)
+  },
+
   computed: {
     hasExpenses() {
       return this.dayExpenses.length > 0
@@ -68,9 +84,19 @@ export default {
     totalAmount() {
       return this.dayExpenses.reduce((sum, expense) => sum + expense.amount, 0).toFixed(2)
     },
+    isMobileView() {
+      return this.windowWidth < 768
+    },
+    formattedAmount() {
+      const total = this.dayExpenses.reduce((sum, expense) => sum + expense.amount, 0)
+      return formatCurrency(total, this.isMobileView)
+    }
   },
 
   methods: {
+    updateWindowWidth() {
+      this.windowWidth = window.innerWidth
+    },
     selectDay() {
       if (this.type === 'current-month') {
         this.$emit('select-day', this.day)

@@ -7,7 +7,7 @@
     <!-- Total Expenses Card -->
     <div class="total-expenses-card">
       <h3>Total Expenses</h3>
-      <div class="amount">{{ totalExpenses }}€</div>
+      <div class="amount">{{ formattedTotalExpenses }}€</div>
     </div>
 
     <!-- Weekly Spending Section -->
@@ -19,7 +19,7 @@
           <div class="progress-bar" :style="{ width: week.percentage + '%' }"></div>
         </div>
         <div class="week-amount">
-          {{ week.amount.toFixed(2) }}€ <span class="percentage">({{ week.percentage }}%)</span>
+          {{ formatAmount(week.amount) }}€ <span class="percentage">({{ week.percentage }}%)</span>
         </div>
       </div>
     </div>
@@ -31,7 +31,7 @@
         <div class="category-icon">{{ getCategoryIcon(category.id) }}</div>
         <div class="category-info">
           <div class="category-name">{{ getCategoryName(category.id) }}</div>
-          <div class="category-amount">{{ category.amount.toFixed(2) }}€</div>
+          <div class="category-amount">{{ formatAmount(category.amount) }}€</div>
         </div>
         <div class="category-percentage">{{ category.percentage }}%</div>
       </div>
@@ -40,6 +40,8 @@
 </template>
 
 <script>
+import { formatCurrency } from '../../utils/formatters.js'
+
 export default {
   name: 'MonthlyOverview',
 
@@ -62,7 +64,25 @@ export default {
     },
   },
 
+  data() {
+    return {
+      windowWidth: window.innerWidth,
+    }
+  },
+
+  created() {
+    window.addEventListener('resize', this.updateWindowWidth)
+  },
+
+  unmounted() {
+    window.removeEventListener('resize', this.updateWindowWidth)
+  },
+
   computed: {
+    isMobileView() {
+      return this.windowWidth < 768
+    },
+
     currentMonthExpenses() {
       return this.expenses.filter((expense) => {
         const expenseDate = new Date(expense.date)
@@ -75,6 +95,11 @@ export default {
 
     totalExpenses() {
       return this.calculateTotal(this.currentMonthExpenses).toFixed(2)
+    },
+
+    formattedTotalExpenses() {
+      const total = this.calculateTotal(this.currentMonthExpenses)
+      return formatCurrency(total, this.isMobileView)
     },
 
     weeklyExpenses() {
@@ -139,6 +164,14 @@ export default {
   },
 
   methods: {
+    updateWindowWidth() {
+      this.windowWidth = window.innerWidth
+    },
+
+    formatAmount(value) {
+      return formatCurrency(value, this.isMobileView)
+    },
+
     calculateTotal(expenses) {
       return expenses.reduce((sum, expense) => sum + expense.amount, 0)
     },
