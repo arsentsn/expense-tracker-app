@@ -2,8 +2,12 @@
   <div class="app-container">
     <NavigationBar />
     <div class="main-content">
-      <CalendarView @add-expense="openExpenseModal" :expenses="expenses" />
-      <OverviewPanel />
+      <CalendarView
+        @add-expense="openExpenseModal"
+        :expenses="expenses"
+        @month-changed="updateSelectedMonth"
+      />
+      <OverviewPanel :expenses="expenses" :selected-date="selectedDate" />
     </div>
   </div>
   <ExpenseModal
@@ -32,7 +36,7 @@ export default {
   data() {
     return {
       expenses: [],
-      selectedDate: null,
+      selectedDate: new Date(), // Initialize with current date
       showExpenseModal: false,
       dateForNewExpense: new Date(),
     }
@@ -55,6 +59,10 @@ export default {
       this.dateForNewExpense = date
       this.showExpenseModal = true
     },
+    // New method to update selected month
+    updateSelectedMonth(newDate) {
+      this.selectedDate = newDate
+    },
   },
 }
 </script>
@@ -66,11 +74,6 @@ export default {
   box-sizing: border-box;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
-}
-
 .app-container {
   margin: 0 auto;
   padding: 20px 40px;
@@ -78,9 +81,8 @@ body {
 }
 
 .main-content {
-  padding-top: 40px; /* Navigation bar height */
   display: flex;
-  margin-top: 20px;
+  margin-top: 40px; /* Navigation bar height */
   width: 100%;
   gap: 20px;
 }

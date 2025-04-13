@@ -5,3 +5,4 @@ TO DO (optional):
 --reset data button
 --change currency
 -Supabase integration
+-test edge cases (expense amount too big etc)

@@ -26,57 +26,59 @@ import CalendarDay from './CalendarDay.vue'
 
 export default {
   name: 'CalendarGrid',
-  
+
   components: {
-    CalendarDay
+    CalendarDay,
   },
-  
+
   props: {
     currentMonth: {
       type: Number,
-      required: true
+      required: true,
     },
     currentYear: {
       type: Number,
-      required: true
+      required: true,
     },
     selectedDay: {
       type: Number,
-      default: null
+      default: null,
     },
     expenses: {
       type: Array,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
-  
+
   data() {
     return {
-      weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+      weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
     }
   },
-  
+
   methods: {
     getDaysInMonth() {
       return new Date(this.currentYear, this.currentMonth + 1, 0).getDate()
     },
-    
+
     onSelectDay(day) {
       this.$emit('day-selected', day)
     },
-    
+
     onAddExpense(date) {
       this.$emit('add-expense', date)
     },
-    
+
     getExpensesForDay(day, type) {
       if (type !== 'current-month') return []
-      
-      const dateString = new Date(this.currentYear, this.currentMonth, day).toISOString().split('T')[0]
-      return this.expenses.filter(expense => expense.date === dateString)
-    }
+
+      const dateString = new Date(this.currentYear, this.currentMonth, day)
+        .toISOString()
+        .split('T')[0]
+      return this.expenses.filter((expense) => expense.date === dateString)
+    },
   },
-  
+
   computed: {
     calendarDays() {
       let allDays = []
@@ -125,8 +127,8 @@ export default {
       }
 
       return allDays
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -134,7 +136,9 @@ export default {
 .weekdays-header-container {
   display: flex;
   justify-content: space-between;
-  margin-top: 15px;
+  font-weight: 500;
+  font-size: 0.85rem;
+  color: rgba(107, 114, 128, 1);
 }
 
 .weekday-header {

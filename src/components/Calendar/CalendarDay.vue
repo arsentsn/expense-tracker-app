@@ -13,7 +13,7 @@
     <div class="day-number">{{ day }}</div>
 
     <div v-if="hasExpenses" class="expense-info">
-      <div class="expense-amount">${{ totalAmount }}</div>
+      <div class="expense-amount">{{ totalAmount }}€</div>
     </div>
     <div v-if="hasExpenses">
       <div class="expense-count">({{ dayExpenses.length }})</div>
@@ -173,7 +173,7 @@ export default {
 }
 
 .expense-info {
-  margin-top: 25px;
+  margin-top: 28px;
   text-align: center;
   font-size: 0.85rem;
 }

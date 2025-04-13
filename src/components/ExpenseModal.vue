@@ -11,11 +11,13 @@
           placeholder="e.g., Lunch, Coffee, Groceries..."
           v-model="expenseName"
         />
+        <div v-if="nameError" class="error-message">{{ nameError }}</div>
       </div>
 
       <div class="form-group">
-        <label for="expense-amount">Amount ($)</label>
+        <label for="expense-amount">Amount (€)</label>
         <input type="number" id="expense-amount" placeholder="0.00" step="0.01" v-model="amount" />
+        <div v-if="amountError" class="error-message">{{ amountError }}</div>
       </div>
 
       <div class="form-group">
@@ -60,6 +62,8 @@ export default {
       expenseName: '',
       amount: '',
       selectedCategory: 'other',
+      nameError: '',
+      amountError: '',
       categories: [
         { id: 'food', name: 'Food', icon: '🍔' },
         { id: 'transport', name: 'Transport', icon: '🚗' },
@@ -77,28 +81,51 @@ export default {
     closeModal() {
       this.$emit('close')
     },
+    validateForm() {
+      let isValid = true
+
+      // Validate name
+      if (!this.expenseName.trim()) {
+        this.nameError = 'Name is required'
+        isValid = false
+      } else {
+        this.nameError = ''
+      }
+
+      // Validate amount
+      if (!this.amount) {
+        this.amountError = 'Amount is required'
+        isValid = false
+      } else if (isNaN(parseFloat(this.amount)) || parseFloat(this.amount) <= 0) {
+        this.amountError = 'Amount must be a positive number'
+        isValid = false
+      } else {
+        this.amountError = ''
+      }
+
+      return isValid
+    },
     submitExpense() {
-      if (!this.expenseName.trim() || !this.amount || isNaN(parseFloat(this.amount)) || parseFloat(this.amount) <= 0) {
-        alert('Please enter a valid name and amount')
-        return
+      if (this.validateForm()) {
+        const expense = {
+          id: Date.now().toString(),
+          name: this.expenseName.trim(),
+          amount: parseFloat(this.amount),
+          category: this.selectedCategory,
+          date: this.date ? this.date.toISOString().split('T')[0] : new Date().toISOString().split('T')[0]
+        }
+        
+        this.$emit('save', expense)
+        this.resetForm()
+        this.$emit('close')
       }
-      
-      const expense = {
-        id: Date.now().toString(),
-        name: this.expenseName.trim(),
-        amount: parseFloat(this.amount),
-        category: this.selectedCategory,
-        date: this.date ? this.date.toISOString().split('T')[0] : new Date().toISOString().split('T')[0]
-      }
-      
-      this.$emit('save', expense)
-      this.resetForm()
-      this.$emit('close')
     },
     resetForm() {
       this.expenseName = ''
       this.amount = ''
       this.selectedCategory = 'other'
+      this.nameError = ''
+      this.amountError = ''
     },
   },
 }
@@ -157,6 +184,12 @@ input:focus {
 
 .form-group {
   margin-bottom: 20px;
+}
+
+.error-message {
+  color: #ef4444;
+  font-size: 0.8rem;
+  margin-top: 0.4rem;
 }
 
 .category-grid {
