@@ -56,10 +56,33 @@ export default {
 
 <style scoped>
 .overview-panel {
-  flex: 1;
   background-color: #fff;
   border-radius: 8px;
-  padding: 15px 15px 0px 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+/* Mobile (375px - 767px) */
+@media (max-width: 767px) {
+  .overview-panel {
+    padding: 10px 10px 0px 10px;
+    margin-bottom: 20px;
+  }
+}
+
+/* Tablet (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .overview-panel {
+    padding: 12px 12px 0px 12px;
+    margin-bottom: 20px;
+  }
+}
+
+/* Desktop (1024px and above) */
+@media (min-width: 1024px) {
+  .overview-panel {
+    flex: 1;
+    padding: 15px 15px 0px 15px;
+  }
 }
 </style>

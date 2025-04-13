@@ -55,9 +55,44 @@ export default {
   border-radius: 20px;
   border: none;
   background-color: #004467;
-  padding: 8px 10px;
   color: white;
   font-weight: 600;
   cursor: pointer;
+}
+
+/* Mobile (375px - 767px) */
+@media (max-width: 767px) {
+  .calendar-navigation h2 {
+    font-size: 1.1rem;
+  }
+  
+  .directional-button {
+    padding: 6px 8px;
+    font-size: 0.85rem;
+  }
+}
+
+/* Tablet (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .calendar-navigation h2 {
+    font-size: 1.2rem;
+  }
+  
+  .directional-button {
+    padding: 7px 10px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Desktop (1024px and above) */
+@media (min-width: 1024px) {
+  .calendar-navigation h2 {
+    font-size: 1.3rem;
+  }
+  
+  .directional-button {
+    padding: 8px 12px;
+    font-size: 0.95rem;
+  }
 }
 </style>

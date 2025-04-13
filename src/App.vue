@@ -76,24 +76,45 @@ export default {
 
 .app-container {
   margin: 0 auto;
-  padding: 20px 40px;
   width: 100%;
+  max-width: 1400px;
 }
 
 .main-content {
   display: flex;
-  margin-top: 40px; /* Navigation bar height */
+  flex-direction: column;
+  margin-top: 45px; /* Navigation bar height */
   width: 100%;
-  gap: 20px;
+  gap: 15px;
 }
 
-@media (max-width: 768px) {
-  .main-content {
-    flex-direction: column;
-  }
-
+/* Mobile (375px - 767px) */
+@media (max-width: 767px) {
   .app-container {
-    padding: 5px;
+    padding: 10px;
+  }
+}
+
+/* Tablet (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .app-container {
+    padding: 15px 20px;
+  }
+  
+  .main-content {
+    gap: 20px;
+  }
+}
+
+/* Desktop (1024px and above) */
+@media (min-width: 1024px) {
+  .app-container {
+    padding: 20px 40px;
+  }
+  
+  .main-content {
+    flex-direction: row;
+    gap: 25px;
   }
 }
 </style>

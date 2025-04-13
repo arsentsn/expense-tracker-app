@@ -90,9 +90,7 @@ export default {
 <style scoped>
 .calendar-day {
   text-align: left;
-  padding: 4px 8px;
   border: 1px solid #e5e5e6;
-  height: 80px;
   position: relative;
   cursor: pointer;
   border-radius: 10px;
@@ -123,7 +121,6 @@ export default {
   position: absolute;
   bottom: 2px;
   left: 4px;
-  font-size: 12px;
   color: #3e3e3e;
 }
 
@@ -131,13 +128,10 @@ export default {
   position: absolute;
   bottom: 5px;
   right: 5px;
-  width: 20px;
-  height: 20px;
   border-radius: 50%;
   background-color: #004467;
   color: white;
   border: none;
-  font-size: 14px;
   font-weight: bold;
   display: flex;
   justify-content: center;
@@ -151,7 +145,8 @@ export default {
   z-index: 5;
 }
 
-.add-expense-button:hover {
+.add-expense-button:hover,
+.add-expense-button:active {
   background-color: #e15e10;
   transform: scale(1.1);
 }
@@ -169,13 +164,10 @@ export default {
   position: absolute;
   top: 5px;
   left: 8px;
-  font-size: 0.9rem;
 }
 
 .expense-info {
-  margin-top: 28px;
   text-align: center;
-  font-size: 0.85rem;
 }
 
 .expense-amount {
@@ -186,5 +178,94 @@ export default {
 
 .calendar-day.has-expenses {
   background-color: rgba(76, 175, 80, 0.1);
+}
+
+/* Mobile styles (375px - 767px) */
+@media (max-width: 767px) {
+  .calendar-day {
+    padding: 2px 4px;
+    height: 60px;
+  }
+  
+  .day-number {
+    font-size: 0.8rem;
+    top: 3px;
+    left: 5px;
+  }
+  
+  .expense-info {
+    margin-top: 22px;
+    font-size: 0.7rem;
+  }
+  
+  .expense-count {
+    font-size: 0.65rem;
+  }
+  
+  .add-expense-button {
+    width: 16px;
+    height: 16px;
+    font-size: 12px;
+    bottom: 3px;
+    right: 3px;
+  }
+}
+
+/* Tablet styles (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .calendar-day {
+    padding: 3px 6px;
+    height: 70px;
+  }
+  
+  .day-number {
+    font-size: 0.85rem;
+    top: 4px;
+    left: 6px;
+  }
+  
+  .expense-info {
+    margin-top: 25px;
+    font-size: 0.8rem;
+  }
+  
+  .expense-count {
+    font-size: 0.7rem;
+  }
+  
+  .add-expense-button {
+    width: 18px;
+    height: 18px;
+    font-size: 13px;
+    bottom: 4px;
+    right: 4px;
+  }
+}
+
+/* Desktop styles (1024px and above) */
+@media (min-width: 1024px) {
+  .calendar-day {
+    padding: 4px 8px;
+    height: 80px;
+  }
+  
+  .day-number {
+    font-size: 0.9rem;
+  }
+  
+  .expense-info {
+    margin-top: 28px;
+    font-size: 0.85rem;
+  }
+  
+  .expense-count {
+    font-size: 0.75rem;
+  }
+  
+  .add-expense-button {
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+  }
 }
 </style>

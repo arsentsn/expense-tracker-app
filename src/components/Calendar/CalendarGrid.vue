@@ -137,7 +137,6 @@ export default {
   display: flex;
   justify-content: space-between;
   font-weight: 500;
-  font-size: 0.85rem;
   color: rgba(107, 114, 128, 1);
 }
 
@@ -145,13 +144,57 @@ export default {
   flex: 1;
   text-align: center;
   font-weight: 500;
-  padding: 8px 0;
 }
 
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 8px;
-  margin-top: 10px;
+  margin-top: 5px;
+}
+
+/* Mobile (375px - 767px) */
+@media (max-width: 767px) {
+  .weekdays-header-container {
+    font-size: 0.7rem;
+  }
+  
+  .weekday-header {
+    padding: 5px 0;
+  }
+  
+  .calendar-grid {
+    gap: 3px;
+  }
+}
+
+/* Tablet (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .weekdays-header-container {
+    font-size: 0.8rem;
+  }
+  
+  .weekday-header {
+    padding: 6px 0;
+  }
+  
+  .calendar-grid {
+    gap: 5px;
+  }
+}
+
+/* Desktop (1024px and above) */
+@media (min-width: 1024px) {
+  .weekdays-header-container {
+    font-size: 0.85rem;
+  }
+  
+  .weekday-header {
+    padding: 8px 0;
+  }
+  
+  .calendar-grid {
+    gap: 8px;
+    margin-top: 10px;
+  }
 }
 </style>

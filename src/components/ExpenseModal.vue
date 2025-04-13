@@ -148,15 +148,23 @@ export default {
 .expense-modal {
   background-color: white;
   border-radius: 12px;
-  box-shadow: 0 4px 16px var(--shadow-color);
-  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
   width: 90%;
-  max-width: 450px;
-  animation: slideIn-5e94698f 0.3s ease-out;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .modal-title {
-  font-size: 1.5rem;
   margin-bottom: 1.5rem;
 }
 
@@ -164,16 +172,13 @@ label {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 600;
-  font-size: 0.9rem;
 }
 
 input {
   width: 100%;
-  padding: 0.7rem;
   border: 1px solid #e5e5e6;
   border-radius: 6px;
   background-color: #f7f7f8;
-  font-size: 0.95rem;
   transition: border-color 0.2s;
 }
 
@@ -188,7 +193,6 @@ input:focus {
 
 .error-message {
   color: #ef4444;
-  font-size: 0.8rem;
   margin-top: 0.4rem;
 }
 
@@ -198,16 +202,10 @@ input:focus {
   gap: 0.75rem;
 }
 
-.categroy-name {
-  font-size: 14px;
-}
-
 .category-option {
   background-color: #f7f7f8;
   border: 1px solid #e5e5e6;
   border-radius: 6px;
-  padding: 0.5rem;
-  font-size: 14px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -223,10 +221,6 @@ input:focus {
   border-color: #004467;
 }
 
-.category-icon {
-  font-size: 1.5rem;
-}
-
 .modal-actions {
   display: flex;
   justify-content: space-between;
@@ -235,11 +229,9 @@ input:focus {
 
 .cancel-button,
 .submit-button {
-  padding: 0.75rem 1.5rem;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 1rem;
 }
 
 .cancel-button {
@@ -250,5 +242,125 @@ input:focus {
 .submit-button {
   background-color: #004467;
   color: white;
+}
+
+/* Mobile (375px - 767px) */
+@media (max-width: 767px) {
+  .expense-modal {
+    padding: 1.2rem;
+    max-width: 95%;
+  }
+  
+  .modal-title {
+    font-size: 1.3rem;
+  }
+  
+  label {
+    font-size: 0.85rem;
+  }
+  
+  input {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+  
+  .error-message {
+    font-size: 0.75rem;
+  }
+  
+  .category-option {
+    padding: 0.4rem;
+    font-size: 13px;
+  }
+  
+  .category-icon {
+    font-size: 1.3rem;
+  }
+  
+  .cancel-button,
+  .submit-button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Tablet (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .expense-modal {
+    padding: 1.5rem;
+    max-width: 500px;
+  }
+  
+  .modal-title {
+    font-size: 1.4rem;
+  }
+  
+  label {
+    font-size: 0.85rem;
+  }
+  
+  input {
+    padding: 0.65rem;
+    font-size: 0.92rem;
+  }
+  
+  .error-message {
+    font-size: 0.78rem;
+  }
+  
+  .category-option {
+    padding: 0.45rem;
+    font-size: 13.5px;
+  }
+  
+  .category-icon {
+    font-size: 1.4rem;
+  }
+  
+  .cancel-button,
+  .submit-button {
+    padding: 0.7rem 1.3rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Desktop (1024px and above) */
+@media (min-width: 1024px) {
+  .expense-modal {
+    padding: 2rem;
+    max-width: 450px;
+  }
+  
+  .modal-title {
+    font-size: 1.5rem;
+  }
+  
+  label {
+    font-size: 0.9rem;
+  }
+  
+  input {
+    padding: 0.7rem;
+    font-size: 0.95rem;
+  }
+  
+  .error-message {
+    font-size: 0.8rem;
+  }
+  
+  .category-option {
+    padding: 0.5rem;
+    font-size: 14px;
+  }
+  
+  .category-icon {
+    font-size: 1.5rem;
+  }
+  
+  .cancel-button,
+  .submit-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+  }
 }
 </style>

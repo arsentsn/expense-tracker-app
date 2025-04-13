@@ -24,12 +24,11 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 12px;
   background-color: #f5f5f5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .logo {
-  font-size: 1.5rem;
   font-weight: bold;
   color: #333;
 }
@@ -37,5 +36,41 @@ export default {
 .profile-button {
   border: none;
   background: none;
+}
+
+/* Mobile (375px - 767px) */
+@media (max-width: 767px) {
+  .navigation-bar {
+    padding: 8px 15px;
+    height: 45px;
+  }
+  
+  .logo {
+    font-size: 1.2rem;
+  }
+}
+
+/* Tablet (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .navigation-bar {
+    padding: 5px 20px;
+    height: 45px;
+  }
+  
+  .logo {
+    font-size: 1.4rem;
+  }
+}
+
+/* Desktop (1024px and above) */
+@media (min-width: 1024px) {
+  .navigation-bar {
+    padding: 5px 40px;
+    height: 45px;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+  }
 }
 </style>

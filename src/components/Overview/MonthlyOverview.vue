@@ -54,23 +54,25 @@ export default {
     },
     currentMonth: {
       type: Number,
-      default: () => new Date().getMonth()
+      default: () => new Date().getMonth(),
     },
     currentYear: {
       type: Number,
-      default: () => new Date().getFullYear()
-    }
+      default: () => new Date().getFullYear(),
+    },
   },
 
   computed: {
     currentMonthExpenses() {
-      return this.expenses.filter(expense => {
-        const expenseDate = new Date(expense.date);
-        return expenseDate.getMonth() === this.currentMonth && 
-               expenseDate.getFullYear() === this.currentYear;
-      });
+      return this.expenses.filter((expense) => {
+        const expenseDate = new Date(expense.date)
+        return (
+          expenseDate.getMonth() === this.currentMonth &&
+          expenseDate.getFullYear() === this.currentYear
+        )
+      })
     },
-    
+
     totalExpenses() {
       return this.calculateTotal(this.currentMonthExpenses).toFixed(2)
     },
@@ -148,7 +150,7 @@ export default {
 
     getCategoryIcon(categoryId) {
       const category = this.categories.find((c) => c.id === categoryId)
-      return category ? category.icon : '❓'
+      return category ? category.icon : '&#63;'
     },
 
     getWeekNumber(date) {
@@ -178,13 +180,11 @@ export default {
 
 .panel-title {
   margin: 0;
-  font-size: 1.5rem;
   font-weight: 600;
 }
 
 .date {
   color: #666;
-  font-size: 1.1rem;
 }
 
 .section {
@@ -192,7 +192,6 @@ export default {
 }
 
 .section h3 {
-  font-size: 1.2rem;
   font-weight: 600;
   color: #333;
 }
@@ -209,20 +208,16 @@ export default {
   background-color: #004467;
   color: white;
   border-radius: 8px;
-  padding: 15px;
-  margin-bottom: 15px;
   text-align: center;
 }
 
 .total-expenses-card h3 {
   margin-bottom: 5px;
-  font-size: 1rem;
   font-weight: 500;
   color: #ccc;
 }
 
 .amount {
-  font-size: 1.4rem;
   font-weight: bold;
 }
 
@@ -246,7 +241,6 @@ export default {
   height: 10px;
   background-color: #eee;
   border-radius: 5px;
-  margin: 0 15px;
   overflow: hidden;
 }
 
@@ -257,7 +251,6 @@ export default {
 }
 
 .week-amount {
-  min-width: 100px;
   text-align: right;
   font-weight: 500;
 }
@@ -268,7 +261,6 @@ export default {
 }
 
 .category-row {
-  padding: 10px;
   border-radius: 8px;
   transition: background-color 0.2s;
 }
@@ -278,12 +270,10 @@ export default {
 }
 
 .category-icon {
-  font-size: 1.75rem;
   margin-right: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
 }
 
 .category-info {
@@ -297,13 +287,188 @@ export default {
 
 .category-amount {
   color: #666;
-  font-size: 0.9rem;
 }
 
 .category-percentage {
   font-weight: bold;
   color: #004467;
-  min-width: 60px;
   text-align: right;
+}
+
+/* Mobile (375px - 767px) */
+@media (max-width: 767px) {
+  .panel-title {
+    font-size: 1.2rem;
+  }
+
+  .date {
+    font-size: 0.9rem;
+  }
+
+  .section h3 {
+    font-size: 1rem;
+  }
+
+  .total-expenses-card {
+    padding: 12px;
+    margin-bottom: 12px;
+  }
+
+  .total-expenses-card h3 {
+    font-size: 0.9rem;
+  }
+
+  .amount {
+    font-size: 1.2rem;
+  }
+
+  .progress-container {
+    margin: 0 10px;
+  }
+
+  .week-amount {
+    min-width: 80px;
+    font-size: 0.8rem;
+  }
+
+  .category-row {
+    padding: 8px;
+  }
+
+  .category-icon {
+    font-size: 1.4rem;
+    width: 30px;
+  }
+
+  .category-name {
+    font-size: 0.9rem;
+  }
+
+  .category-amount {
+    font-size: 0.8rem;
+  }
+
+  .category-percentage {
+    min-width: 45px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Tablet (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .panel-title {
+    font-size: 1.3rem;
+  }
+
+  .date {
+    font-size: 1rem;
+  }
+
+  .section h3 {
+    font-size: 1.1rem;
+  }
+
+  .total-expenses-card {
+    padding: 14px;
+    margin-bottom: 14px;
+  }
+
+  .total-expenses-card h3 {
+    font-size: 0.95rem;
+  }
+
+  .amount {
+    font-size: 1.3rem;
+  }
+
+  .progress-container {
+    margin: 0 12px;
+  }
+
+  .week-amount {
+    min-width: 90px;
+    font-size: 0.85rem;
+  }
+
+  .category-row {
+    padding: 9px;
+  }
+
+  .category-icon {
+    font-size: 1.6rem;
+    width: 35px;
+  }
+
+  .category-name {
+    font-size: 0.95rem;
+  }
+
+  .category-amount {
+    font-size: 0.85rem;
+  }
+
+  .category-percentage {
+    min-width: 50px;
+    font-size: 0.95rem;
+  }
+}
+
+/* Desktop (1024px and above) */
+@media (min-width: 1024px) {
+  .panel-title {
+    font-size: 1.5rem;
+  }
+
+  .date {
+    font-size: 1.1rem;
+  }
+
+  .section h3 {
+    font-size: 1.2rem;
+  }
+
+  .total-expenses-card {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+
+  .total-expenses-card h3 {
+    font-size: 1rem;
+  }
+
+  .amount {
+    font-size: 1.4rem;
+  }
+
+  .progress-container {
+    margin: 0 15px;
+  }
+
+  .week-amount {
+    min-width: 100px;
+    font-size: 0.9rem;
+  }
+
+  .category-row {
+    padding: 10px;
+  }
+
+  .category-icon {
+    font-size: 1.75rem;
+    width: 40px;
+  }
+
+  .category-name {
+    font-size: 1rem;
+  }
+
+  .category-amount {
+    font-size: 0.9rem;
+  }
+
+  .category-percentage {
+    min-width: 60px;
+    font-size: 1rem;
+  }
 }
 </style>
