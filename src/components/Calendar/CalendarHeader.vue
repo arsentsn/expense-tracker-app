@@ -54,7 +54,7 @@ export default {
 .directional-button {
   border-radius: 20px;
   border: none;
-  background-color: #004467;
+  background-color: var(--primary-color);
   color: white;
   font-weight: 600;
   cursor: pointer;
@@ -65,7 +65,7 @@ export default {
   .calendar-navigation h2 {
     font-size: 1.1rem;
   }
-  
+
   .directional-button {
     padding: 6px 8px;
     font-size: 0.85rem;
@@ -77,7 +77,7 @@ export default {
   .calendar-navigation h2 {
     font-size: 1.2rem;
   }
-  
+
   .directional-button {
     padding: 7px 10px;
     font-size: 0.9rem;
@@ -89,7 +89,7 @@ export default {
   .calendar-navigation h2 {
     font-size: 1.3rem;
   }
-  
+
   .directional-button {
     padding: 8px 12px;
     font-size: 0.95rem;

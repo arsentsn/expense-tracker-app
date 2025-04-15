@@ -25,8 +25,8 @@
         v-if="currentView === 'monthly'"
         :expenses="expenses"
         :categories="categories"
-        :current-month="getCurrentMonth(selectedDate)"
-        :current-year="getCurrentYear(selectedDate)"
+        :current-month="getCurrentMonth(viewingDate)"
+        :current-year="getCurrentYear(viewingDate)"
       />
 
       <daily-overview
@@ -61,6 +61,10 @@ export default {
     selectedDate: {
       type: Date,
       default: null,
+    },
+    viewingDate: {
+      type: Date,
+      default: () => new Date(), // Sensible default
     },
   },
 

@@ -212,22 +212,6 @@ export default {
   width: 100%;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.panel-title {
-  margin: 0;
-  font-weight: 600;
-}
-
-.date {
-  color: #666;
-}
-
 .section {
   margin-bottom: 15px;
 }
@@ -246,7 +230,7 @@ export default {
 }
 
 .total-expenses-card {
-  background-color: #004467;
+  background-color: var(--primary-color);
   color: white;
   border-radius: 8px;
   text-align: center;
@@ -333,7 +317,7 @@ export default {
 
 .category-percentage {
   font-weight: bold;
-  color: #004467;
+  color: var(--primary-color);
   text-align: right;
 }
 
@@ -348,14 +332,6 @@ export default {
 
 /* Mobile (375px - 767px) */
 @media (max-width: 767px) {
-  .panel-title {
-    font-size: 1.2rem;
-  }
-
-  .date {
-    font-size: 0.9rem;
-  }
-
   .section h3 {
     font-size: 1rem;
   }
@@ -407,14 +383,6 @@ export default {
 
 /* Tablet (768px - 1023px) */
 @media (min-width: 768px) and (max-width: 1023px) {
-  .panel-title {
-    font-size: 1.3rem;
-  }
-
-  .date {
-    font-size: 1rem;
-  }
-
   .section h3 {
     font-size: 1.1rem;
   }
@@ -466,14 +434,6 @@ export default {
 
 /* Desktop (1024px and above) */
 @media (min-width: 1024px) {
-  .panel-title {
-    font-size: 1.5rem;
-  }
-
-  .date {
-    font-size: 1.1rem;
-  }
-
   .section h3 {
     font-size: 1.2rem;
   }

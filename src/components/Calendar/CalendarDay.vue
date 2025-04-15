@@ -65,7 +65,7 @@ export default {
 
   data() {
     return {
-      windowWidth: window.innerWidth
+      windowWidth: window.innerWidth,
     }
   },
 
@@ -90,7 +90,7 @@ export default {
     formattedAmount() {
       const total = this.dayExpenses.reduce((sum, expense) => sum + expense.amount, 0)
       return formatCurrency(total, this.isMobileView)
-    }
+    },
   },
 
   methods: {
@@ -136,7 +136,7 @@ export default {
 }
 
 .calendar-day.selected {
-  outline: 2px solid #004467;
+  outline: 2px solid var(--primary-color);
 }
 
 .calendar-day.selected .expense-amount,
@@ -156,7 +156,7 @@ export default {
   bottom: 5px;
   right: 5px;
   border-radius: 50%;
-  background-color: #004467;
+  background-color: var(--primary-color);
   color: white;
   border: none;
   font-weight: bold;
@@ -199,7 +199,7 @@ export default {
 
 .expense-amount {
   font-weight: 500;
-  color: #004467;
+  color: var(--primary-color);
   font-weight: bold;
 }
 
@@ -213,22 +213,22 @@ export default {
     padding: 2px 4px;
     height: 60px;
   }
-  
+
   .day-number {
     font-size: 0.8rem;
     top: 3px;
     left: 5px;
   }
-  
+
   .expense-info {
     margin-top: 22px;
     font-size: 0.7rem;
   }
-  
+
   .expense-count {
     font-size: 0.65rem;
   }
-  
+
   .add-expense-button {
     width: 16px;
     height: 16px;
@@ -244,22 +244,22 @@ export default {
     padding: 3px 6px;
     height: 70px;
   }
-  
+
   .day-number {
     font-size: 0.85rem;
     top: 4px;
     left: 6px;
   }
-  
+
   .expense-info {
     margin-top: 25px;
     font-size: 0.8rem;
   }
-  
+
   .expense-count {
     font-size: 0.7rem;
   }
-  
+
   .add-expense-button {
     width: 18px;
     height: 18px;
@@ -275,20 +275,20 @@ export default {
     padding: 4px 8px;
     height: 80px;
   }
-  
+
   .day-number {
     font-size: 0.9rem;
   }
-  
+
   .expense-info {
     margin-top: 28px;
     font-size: 0.85rem;
   }
-  
+
   .expense-count {
     font-size: 0.75rem;
   }
-  
+
   .add-expense-button {
     width: 20px;
     height: 20px;

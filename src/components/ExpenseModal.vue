@@ -17,7 +17,13 @@
 
         <div class="form-group">
           <label for="expense-amount">Amount (€)</label>
-          <input type="number" id="expense-amount" placeholder="0.00" step="0.01" v-model="amount" />
+          <input
+            type="number"
+            id="expense-amount"
+            placeholder="0.00"
+            step="0.01"
+            v-model="amount"
+          />
           <div v-if="amountError" class="error-message">{{ amountError }}</div>
         </div>
 
@@ -114,9 +120,11 @@ export default {
           name: this.expenseName.trim(),
           amount: parseFloat(this.amount),
           category: this.selectedCategory,
-          date: this.date ? this.date.toISOString().split('T')[0] : new Date().toISOString().split('T')[0]
+          date: this.date
+            ? this.date.toISOString().split('T')[0]
+            : new Date().toISOString().split('T')[0],
         }
-        
+
         this.$emit('save', expense)
         this.resetForm()
         this.$emit('close')
@@ -186,7 +194,7 @@ input {
 
 input:focus {
   outline: none;
-  border-color: #004467;
+  border-color: var(--primary-color);
 }
 
 .form-group {
@@ -220,7 +228,7 @@ input:focus {
 
 .category-option.selected {
   background-color: #f0f0f0;
-  border-color: #004467;
+  border-color: var(--primary-color);
 }
 
 .modal-actions {
@@ -242,7 +250,7 @@ input:focus {
 }
 
 .submit-button {
-  background-color: #004467;
+  background-color: var(--primary-color);
   color: white;
 }
 
@@ -252,33 +260,33 @@ input:focus {
     padding: 1.2rem;
     max-width: 95%;
   }
-  
+
   .modal-title {
     font-size: 1.3rem;
   }
-  
+
   label {
     font-size: 0.85rem;
   }
-  
+
   input {
     padding: 0.6rem;
     font-size: 0.9rem;
   }
-  
+
   .error-message {
     font-size: 0.75rem;
   }
-  
+
   .category-option {
     padding: 0.4rem;
     font-size: 13px;
   }
-  
+
   .category-icon {
     font-size: 1.3rem;
   }
-  
+
   .cancel-button,
   .submit-button {
     padding: 0.6rem 1.2rem;
@@ -292,33 +300,33 @@ input:focus {
     padding: 1.5rem;
     max-width: 500px;
   }
-  
+
   .modal-title {
     font-size: 1.4rem;
   }
-  
+
   label {
     font-size: 0.85rem;
   }
-  
+
   input {
     padding: 0.65rem;
     font-size: 0.92rem;
   }
-  
+
   .error-message {
     font-size: 0.78rem;
   }
-  
+
   .category-option {
     padding: 0.45rem;
     font-size: 13.5px;
   }
-  
+
   .category-icon {
     font-size: 1.4rem;
   }
-  
+
   .cancel-button,
   .submit-button {
     padding: 0.7rem 1.3rem;
@@ -332,33 +340,33 @@ input:focus {
     padding: 2rem;
     max-width: 450px;
   }
-  
+
   .modal-title {
     font-size: 1.5rem;
   }
-  
+
   label {
     font-size: 0.9rem;
   }
-  
+
   input {
     padding: 0.7rem;
     font-size: 0.95rem;
   }
-  
+
   .error-message {
     font-size: 0.8rem;
   }
-  
+
   .category-option {
     padding: 0.5rem;
     font-size: 14px;
   }
-  
+
   .category-icon {
     font-size: 1.5rem;
   }
-  
+
   .cancel-button,
   .submit-button {
     padding: 0.75rem 1.5rem;

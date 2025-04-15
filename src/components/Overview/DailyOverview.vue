@@ -1,6 +1,5 @@
-  components: {
-    DeleteIcon
-  },<template>
+components: { DeleteIcon },
+<template>
   <div class="daily-overview">
     <!-- Total Expenses Card -->
     <div class="total-expenses-card">
@@ -55,7 +54,7 @@ export default {
   name: 'DailyOverview',
 
   components: {
-    DeleteIcon
+    DeleteIcon,
   },
 
   props: {
@@ -200,7 +199,7 @@ export default {
 }
 
 .total-expenses-card {
-  background-color: #004467;
+  background-color: var(--primary-color);
   color: white;
   border-radius: 8px;
   text-align: center;
@@ -255,8 +254,8 @@ export default {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 5px;
   margin-left: 10px;
+  margin-top: 4px;
   opacity: 0.6;
   transition: opacity 0.2s;
   color: #e74c3c; /* Red color for the SVG */
@@ -273,7 +272,7 @@ export default {
 
 .expense-amount {
   font-weight: bold;
-  color: #004467;
+  color: var(--primary-color);
 }
 
 .category-row {
@@ -313,7 +312,7 @@ export default {
 
 .category-percentage {
   font-weight: bold;
-  color: #004467;
+  color: var(--primary-color);
   text-align: right;
 }
 
@@ -330,7 +329,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #004467;
+  background-color: var(--primary-color);
   color: white;
   border: none;
   border-radius: 8px;
@@ -352,14 +351,6 @@ export default {
 
 /* Mobile (375px - 767px) */
 @media (max-width: 767px) {
-  .panel-title {
-    font-size: 1.2rem;
-  }
-
-  .selected-date {
-    font-size: 0.9rem;
-  }
-
   .section h3 {
     font-size: 1rem;
   }

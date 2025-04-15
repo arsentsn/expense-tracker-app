@@ -8,10 +8,12 @@
         @month-changed="updateSelectedMonth"
         @day-selected="updateSelectedDay"
       />
-      <OverviewPanel 
-        :expenses="expenses" 
-        :selected-date="selectedDate" 
-        @add-expense="openExpenseModal" 
+      <OverviewPanel
+        ref="overviewPanelRef"
+        :expenses="expenses"
+        :selected-date="selectedDate"
+        :viewing-date="calendarViewingDate"
+        @add-expense="openExpenseModal"
         @delete-expense="deleteExpense"
       />
     </div>
@@ -43,6 +45,7 @@ export default {
     return {
       expenses: [],
       selectedDate: new Date(), // Initialize with current date
+      calendarViewingDate: new Date(),
       showExpenseModal: false,
       dateForNewExpense: new Date(),
     }
@@ -67,16 +70,20 @@ export default {
     },
     // New method to update selected month
     updateSelectedMonth(newDate) {
-      this.selectedDate = newDate
+      this.calendarViewingDate = newDate
+
+      if (this.$refs.overviewPanelRef) {
+        this.$refs.overviewPanelRef.switchToMonthlyView()
+      }
     },
-    
+
     updateSelectedDay(date) {
       this.selectedDate = date
     },
-    
+
     deleteExpense(id) {
       // Find the expense index
-      const index = this.expenses.findIndex(expense => expense.id === id)
+      const index = this.expenses.findIndex((expense) => expense.id === id)
       if (index !== -1) {
         // Remove it from the array
         this.expenses.splice(index, 1)
@@ -121,7 +128,7 @@ export default {
   .app-container {
     padding: 15px 20px;
   }
-  
+
   .main-content {
     gap: 20px;
   }
@@ -132,7 +139,7 @@ export default {
   .app-container {
     padding: 20px 40px;
   }
-  
+
   .main-content {
     flex-direction: row;
     gap: 25px;
