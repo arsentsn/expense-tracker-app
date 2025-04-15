@@ -49,6 +49,7 @@ export default {
       const newDate = new Date(this.currentDate)
       newDate.setMonth(newDate.getMonth() - 1)
       this.currentDate = newDate
+      this.selectedDay = null
       this.$emit('month-changed', new Date(this.currentDate))
     },
 
@@ -56,6 +57,7 @@ export default {
       const newDate = new Date(this.currentDate)
       newDate.setMonth(newDate.getMonth() + 1)
       this.currentDate = newDate
+      this.selectedDay = null
       this.$emit('month-changed', new Date(this.currentDate))
     },
 
