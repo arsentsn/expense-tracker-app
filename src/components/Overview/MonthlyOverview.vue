@@ -1,9 +1,5 @@
 <template>
   <div class="monthly-overview">
-    <div class="header">
-      <h2 class="panel-title">Monthly Overview</h2>
-    </div>
-
     <!-- Total Expenses Card -->
     <div class="total-expenses-card">
       <h3>Total Expenses</h3>
@@ -26,7 +22,7 @@
 
     <!-- Top Categories Section -->
     <div class="section" v-if="hasExpenses">
-      <h3 class="top-categories-header">Top Categories</h3>
+      <h3 class="top-categories-header">Top Monthly Categories</h3>
       <div v-for="category in topCategories" :key="category.id" class="category-row">
         <div class="category-icon">{{ getCategoryIcon(category.id) }}</div>
         <div class="category-info">
@@ -174,6 +170,10 @@ export default {
   methods: {
     updateWindowWidth() {
       this.windowWidth = window.innerWidth
+    },
+
+    switchToDailyView() {
+      this.$emit('switch-to-daily')
     },
 
     formatAmount(value) {

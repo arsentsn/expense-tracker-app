@@ -105,7 +105,8 @@ export default {
 
     addExpense() {
       if (this.type === 'current-month') {
-        const selectedDate = new Date(this.year, this.month, this.day)
+        // Create a date object for this day at noon to avoid timezone issues
+        const selectedDate = new Date(this.year, this.month, this.day, 12, 0, 0)
         this.$emit('add-expense', selectedDate)
       }
     },

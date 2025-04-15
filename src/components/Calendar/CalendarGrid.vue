@@ -72,9 +72,9 @@ export default {
     getExpensesForDay(day, type) {
       if (type !== 'current-month') return []
 
-      const dateString = new Date(this.currentYear, this.currentMonth, day)
-        .toISOString()
-        .split('T')[0]
+      // Create a date object for this day at noon to avoid timezone issues
+      const date = new Date(this.currentYear, this.currentMonth, day, 12, 0, 0)
+      const dateString = date.toISOString().split('T')[0]
       return this.expenses.filter((expense) => expense.date === dateString)
     },
   },

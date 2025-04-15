@@ -6,8 +6,14 @@
         @add-expense="openExpenseModal"
         :expenses="expenses"
         @month-changed="updateSelectedMonth"
+        @day-selected="updateSelectedDay"
       />
-      <OverviewPanel :expenses="expenses" :selected-date="selectedDate" />
+      <OverviewPanel 
+        :expenses="expenses" 
+        :selected-date="selectedDate" 
+        @add-expense="openExpenseModal" 
+        @delete-expense="deleteExpense"
+      />
     </div>
   </div>
   <ExpenseModal
@@ -62,6 +68,21 @@ export default {
     // New method to update selected month
     updateSelectedMonth(newDate) {
       this.selectedDate = newDate
+    },
+    
+    updateSelectedDay(date) {
+      this.selectedDate = date
+    },
+    
+    deleteExpense(id) {
+      // Find the expense index
+      const index = this.expenses.findIndex(expense => expense.id === id)
+      if (index !== -1) {
+        // Remove it from the array
+        this.expenses.splice(index, 1)
+        // Update storage
+        storageService.deleteExpense(id)
+      }
     },
   },
 }

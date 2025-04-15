@@ -61,7 +61,8 @@ export default {
 
     selectDay(day) {
       this.selectedDay = day
-      let selectedDate = new Date(this.currentYear, this.currentMonth, day)
+      // Create a date object for this day at noon to avoid timezone issues
+      let selectedDate = new Date(this.currentYear, this.currentMonth, day, 12, 0, 0)
       this.$emit('day-selected', selectedDate)
     },
 
