@@ -1,0 +1,29 @@
+# https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference
+version: 2
+
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'monthly'
+    open-pull-requests-limit: 5
+    groups:
+      # Security advisories default to one PR each and ignore
+      # open-pull-requests-limit, which is where the noise comes from.
+      # `applies-to` is required -- groups cover version updates only otherwise.
+      security:
+        applies-to: security-updates
+        patterns:
+          - '*'
+      # vue is the only runtime dependency, so give it its own PR rather than
+      # burying it in tooling churn.
+      production:
+        applies-to: version-updates
+        dependency-type: 'production'
+        patterns:
+          - '*'
+      dev-tooling:
+        applies-to: version-updates
+        dependency-type: 'development'
+        patterns:
+          - '*'
